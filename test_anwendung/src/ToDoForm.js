@@ -25,8 +25,6 @@ function ToDoForm({ addTodo, todos }) {
   };
 
   return (
-    <div>
-    <h3>neue Aufgabe</h3>
       <form className="todo-form" onSubmit={handleSubmit}>
         <div>
           <label>Titel</label>
@@ -75,7 +73,6 @@ function ToDoForm({ addTodo, todos }) {
         </div>
         <button className="todo-button">Hinzufügen</button>
       </form>
-      </div>
   );
 }
 

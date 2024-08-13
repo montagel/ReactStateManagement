@@ -5,7 +5,11 @@
   align-items: flex-start;
   background-color: rgb(208, 232, 255);
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
+  min-width: 300px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+
 }
 
 

@@ -1,11 +1,13 @@
+div {
+   font-family: Arial;
+}
+
 .todoApp {
-  font-family: Arial;
+  display: flex;
+  gap: 30px;
 }
 
 .todo-container {
   display: flex;
-  justify-content: space-evenly;
-  gap: 20px;
-  align-items: flex-start;
-  margin-top: 20px;
+  flex-direction: column; 
 }
