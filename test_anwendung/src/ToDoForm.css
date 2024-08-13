@@ -1,0 +1,10 @@
+.todoForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    background-color: rgb(226, 223, 223);
+    border-radius: 3%; 
+    padding: 20px;
+  }
+  
