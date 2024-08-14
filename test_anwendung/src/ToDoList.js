@@ -3,28 +3,29 @@ import './ToDoList.css'
 import { useState } from 'react';
 import ManageToDoItems from './ManageToDoItems';
 
-//Hier kommt noch ein weitere Kindkomponente für das Filtern
 
 function ToDoList({ todos, setHoveredTodo}) {
   const [importanceFilter, setImportanceFilter] = useState(0);
   const [filteredTodos, setFilteredTodos] = useState(todos); // Zustand für die gefilterte Liste
   const [sortOrder, setSortOrder] = useState('ascending'); // 'ascending' oder 'descending'
-  useEffect(() => {
+   
+  useEffect(() => {  
+    // Filtere die Aufgaben, es sei denn, importanceFilter ist 0 (zeigt alle Aufgaben an)
     let updatedTodos = importanceFilter === 0 
-      ? todos 
-      : todos.filter(todo => todo.importance === importanceFilter);
+    ? todos
+    : todos.filter(todo => {
+        return Number(todo.importance) === importanceFilter;
+      });
+
 
     if (sortOrder === 'ascending') {
-      updatedTodos = updatedTodos.sort((a, b) => a.duration - b.duration);
+      updatedTodos.sort((a, b) => a.duration - b.duration);
     } else if (sortOrder === 'descending') {
-      updatedTodos = updatedTodos.sort((a, b) => b.duration - a.duration);
+      updatedTodos.sort((a, b) => b.duration - a.duration);
     }
 
-    setFilteredTodos(updatedTodos);
+    setFilteredTodos(updatedTodos); 
   }, [importanceFilter, sortOrder, todos]);
-
-
-  // Filtere die Aufgaben, es sei denn, importanceFilter ist 0 (zeigt alle Aufgaben an)
  
 
   return (
