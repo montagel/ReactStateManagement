@@ -1,7 +1,8 @@
 import React from 'react';
 import './ToDoDetails.css'; 
 
-function TodoDetails({ todo }) {
+function TodoDetails(todo) {
+
   if (!todo) {
     return <div className="todo-details">Hover über eine Kachel, um Details zu sehen.</div>;
   }

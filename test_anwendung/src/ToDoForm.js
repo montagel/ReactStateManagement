@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import './ToDoForm.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { addTodo } from './redux/slices/toDoSlice';
 
-function ToDoForm({ addTodo, todos }) {
+function ToDoForm() {
+
+  const todos= useSelector((state) => state.todos.todos)
+  const dispatch = useDispatch()
+
+  
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState('');
@@ -10,13 +17,13 @@ function ToDoForm({ addTodo, todos }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    addTodo({
-      id: todos.length,
+    dispatch(addTodo({
       title: title,
       description: description,
       duration: duration,
       importance: importance,
-    });
+    }));
+    console.log(todos)
 
     setTitle('');
     setDescription('');

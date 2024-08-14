@@ -1,11 +1,24 @@
 import React from 'react';
 import './ManageToDo.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { setImportanceFilter, setSortOrder} from './redux/slices/toDoSlice';
 
-function ManageToDoItems({ setImportanceFilter, importanceFilter, setSortOrder  }) {
+function ManageToDoItems() {
+
+  
+  const importanceFilter = useSelector((state) => state.todos.importanceFilter)
+
+
+  const dispatch = useDispatch()
+
+  
+  
   const handleImportanceChange = (e) => {
     const newValue = parseInt(e.target.value);
-        setImportanceFilter(newValue);
-    console.log("Selected importanceFilter:", newValue);
+       dispatch(setImportanceFilter(newValue));
+
+    console.log("Selected importanceFilter:", importanceFilter);
+
   };
 
   const handleSortOrderChange = (e) => {
