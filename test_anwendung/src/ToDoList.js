@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './ToDoList.css'
 import { useState } from 'react';
+import ManageToDoItems from './ManageToDoItems';
 
 //Hier kommt noch ein weitere Kindkomponente für das Filtern
 
 function ToDoList({ todos, setHoveredTodo}) {
+  const [importanceFilter, setImportanceFilter] = useState(0);
+  const [filteredTodos, setFilteredTodos] = useState(todos); // Zustand für die gefilterte Liste
+  const [sortOrder, setSortOrder] = useState('ascending'); // 'ascending' oder 'descending'
+  useEffect(() => {
+    let updatedTodos = importanceFilter === 0 
+      ? todos 
+      : todos.filter(todo => todo.importance === importanceFilter);
 
+    if (sortOrder === 'ascending') {
+      updatedTodos = updatedTodos.sort((a, b) => a.duration - b.duration);
+    } else if (sortOrder === 'descending') {
+      updatedTodos = updatedTodos.sort((a, b) => b.duration - a.duration);
+    }
+
+    setFilteredTodos(updatedTodos);
+  }, [importanceFilter, sortOrder, todos]);
+
+
+  // Filtere die Aufgaben, es sei denn, importanceFilter ist 0 (zeigt alle Aufgaben an)
+ 
 
   return (
     <div>
     <h3>Aufgabenliste</h3>
     <div className="todo-list-container">
-      {todos.length === 0 ? (
+    <ManageToDoItems setSortOrder={setSortOrder}  setImportanceFilter={setImportanceFilter} importanceFilter={importanceFilter}></ManageToDoItems>
+      {filteredTodos.length === 0 ? (
         <p>Noch keine Aufgaben</p>
       ) : (
-        todos.map((todo, index) => (
+        filteredTodos.map((todo, index) => (
           <div key={index} className="todo-item" onMouseEnter={() => setHoveredTodo(todo)} onMouseLeave={() => setHoveredTodo(null)}>
             <h3>{todo.title}</h3>
             <p>Dauer: {todo.duration} h</p>
