@@ -16,6 +16,7 @@ function ToDoForm({ addTodo, todos }) {
       description: description,
       duration: duration,
       importance: importance,
+      createdAt: new Date().toISOString() 
     });
 
     setTitle('');
