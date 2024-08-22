@@ -1,7 +1,10 @@
 import React from 'react';
-import './ToDoDetails.css'; 
+import './ToDoDetails.css';
 
+// Detailinformationen eines To-Do-Elements aus der Liste
 function TodoDetails({ todo }) {
+
+  // Wenn kein To-Do-Element ausgewählt wurde, wird eine Standardnachricht angezeigt
   if (!todo) {
     return <div className="todo-details">Hover über eine Kachel, um Details zu sehen.</div>;
   }

@@ -1,5 +1,6 @@
 div {
-   font-family: Arial;
+  font-family: Arial;
+  padding: 5px;
 }
 
 .todoApp {
@@ -9,5 +10,5 @@ div {
 
 .todo-container {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
