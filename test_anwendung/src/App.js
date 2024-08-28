@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import ToDoForm from './ToDoForm';
 import ToDoList from './ToDoList';
 import TodoDetails from './ToDoDetails';
+import { Provider } from 'react-redux'
+import { store } from './redux/store';
 
 function App() {
 
@@ -19,6 +21,7 @@ function App() {
   };
 
   return (
+    <Provider store={store}>
     <div>
       <h1>Meine To-Do Liste</h1>
       <div className="todoApp">
@@ -31,6 +34,7 @@ function App() {
         <ToDoList setHoveredTodo={setHoveredTodo} todos={todos} />
       </div>
     </div>
+    </Provider>
   );
 }
 
