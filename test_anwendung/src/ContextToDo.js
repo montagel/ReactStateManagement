@@ -16,6 +16,7 @@ export function TodoContextProvider ({ children }) {
     setTodos(newTodos);
     console.log("List item added")
   };
+  
 
     return (
       <TodoContext.Provider value={{ todos, hoveredTodo, setHoveredTodo, addTodo }}>
