@@ -3,34 +3,26 @@ import React, { useState } from 'react';
 import ToDoForm from './ToDoForm';
 import ToDoList from './ToDoList';
 import TodoDetails from './ToDoDetails';
+import { TodoContextProvider } from './ContextToDo';
+
 
 function App() {
 
-  // Liste der To-Dos
-  const [todos, setTodos] = useState([]);
-  // Für das aktuell durch den User hervorgehobene To-Do-Element
-  const [hoveredTodo, setHoveredTodo] = useState(null);
-
-  // Funktion zum Hinzufügen eines neuen To-Dos zur Liste
-  const addTodo = (todo) => {
-    // Ein neues To-Do wird an den Anfang der bestehenden Liste angefügt
-    const newTodos = [todo, ...todos];
-    setTodos(newTodos);
-  };
-
   return (
+    <TodoContextProvider>
     <div>
       <h1>Meine To-Do Liste</h1>
       <div className="todoApp">
         <div className="todo-container">
           <h3>neue Aufgabe</h3>
-          <ToDoForm addTodo={addTodo} todos={todos} />
+          <ToDoForm/>
           <h3>Detailinformationen</h3>
-          <TodoDetails todo={hoveredTodo} ></TodoDetails>
+          <TodoDetails></TodoDetails>
         </div>
-        <ToDoList setHoveredTodo={setHoveredTodo} todos={todos} />
+        <ToDoList/>
       </div>
     </div>
+    </TodoContextProvider>
   );
 }
 
