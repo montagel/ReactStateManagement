@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './ToDoList.css';
 import ToDoItem from './ToDoItem';
+import { useSelector } from 'react-redux';
 
 // Liste mit Sortier- und Filtermöglichkeiten
-function ToDoList({ todos, setHoveredTodo }) {
+function ToDoList() {
+
+  const todos= useSelector((state) => state.todos.todos)
 
   // Um To-Do-Elemente anhand ihrer Wichtigkeit (1-10) zu filtern (bei 0 wird nicht gefiltert)
   const [importanceFilter, setImportanceFilter] = useState(0);
@@ -88,7 +91,7 @@ function ToDoList({ todos, setHoveredTodo }) {
           <p>Noch keine Aufgaben</p>
         ) : (
           filteredTodos.map((todo) => (
-            <ToDoItem key={todo.id} todo={todo} setHoveredTodo={setHoveredTodo} />
+            <ToDoItem key={todo.id} todo={todo}/>
           ))
         )}
       </div>

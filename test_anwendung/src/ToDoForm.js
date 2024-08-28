@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import './ToDoForm.css'
+import './ToDoForm.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { addTodo } from './redux/todo_slice';
+
 
 // Formular zum Erstellen eines To-Do-Elemnts
-function ToDoForm({ addTodo, todos }) {
+function ToDoForm() {
+  
+  const todos= useSelector((state) => state.todos.todos)
+  const dispatch = useDispatch()
 
   // Eigenschaften eines To-Do-Elements
   const [title, setTitle] = useState('');
@@ -15,14 +21,14 @@ function ToDoForm({ addTodo, todos }) {
     // Verhindert, dass die Seite beim Abschicken des Formulars neu geladen wird
     e.preventDefault();
 
-    addTodo({
+   dispatch(addTodo({
       id: todos.length,
       title: title,
       description: description,
       duration: duration,
       importance: importance,
       createdAt: new Date().toISOString()
-    });
+    }));
 
     // Eingabefelder im Formular werden nach dem Hinzufügen des To-Dos zurückgesetzt
     setTitle('');

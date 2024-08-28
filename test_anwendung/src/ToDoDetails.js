@@ -1,8 +1,10 @@
 import React from 'react';
 import './ToDoDetails.css';
+import { useSelector } from 'react-redux';
 
 // Detailinformationen eines To-Do-Elements aus der Liste
-function TodoDetails({ todo }) {
+function TodoDetails() {
+  const todo = useSelector((state) => state.todos.hoveredTodo)
 
   // Wenn kein To-Do-Element ausgewählt wurde, wird eine Standardnachricht angezeigt
   if (!todo) {

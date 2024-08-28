@@ -1,8 +1,12 @@
 import React from 'react';
 import './ToDoItem.css'
+import { useDispatch } from 'react-redux';
+import { setHoveredTodo } from './redux/todo_slice';
 
 // Einzelnes To-Do-Element mit den wichtigsten Informationen
-function ToDoItem({ todo, setHoveredTodo }) {
+function ToDoItem({ todo }) {
+  
+  const dispatch = useDispatch();
 
   // Zum Formatieren des Datums und der Uhrzeit
   const formatDate = (isoString) => {
@@ -22,7 +26,7 @@ function ToDoItem({ todo, setHoveredTodo }) {
   const { formattedDate, formattedTime } = formatDate(todo.createdAt);
 
   return (
-    <div className="todo-item" onMouseEnter={() => setHoveredTodo(todo)} onMouseLeave={() => setHoveredTodo(null)}>
+    <div className="todo-item" onMouseEnter={() => dispatch(setHoveredTodo(todo))} onMouseLeave={() => dispatch(setHoveredTodo(null))}>
       <h3>{todo.title}</h3>
       <p>Erstelldatum: {formattedDate} </p>
       <p>Erstellzeit: {formattedTime} </p>

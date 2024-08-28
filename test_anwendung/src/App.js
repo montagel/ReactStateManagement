@@ -8,18 +8,6 @@ import { store } from './redux/store';
 
 function App() {
 
-  // Liste der To-Dos
-  const [todos, setTodos] = useState([]);
-  // Für das aktuell durch den User hervorgehobene To-Do-Element
-  const [hoveredTodo, setHoveredTodo] = useState(null);
-
-  // Funktion zum Hinzufügen eines neuen To-Dos zur Liste
-  const addTodo = (todo) => {
-    // Ein neues To-Do wird an den Anfang der bestehenden Liste angefügt
-    const newTodos = [todo, ...todos];
-    setTodos(newTodos);
-  };
-
   return (
     <Provider store={store}>
     <div>
@@ -27,11 +15,11 @@ function App() {
       <div className="todoApp">
         <div className="todo-container">
           <h3>neue Aufgabe</h3>
-          <ToDoForm addTodo={addTodo} todos={todos} />
+          <ToDoForm/>
           <h3>Detailinformationen</h3>
-          <TodoDetails todo={hoveredTodo} ></TodoDetails>
+          <TodoDetails></TodoDetails>
         </div>
-        <ToDoList setHoveredTodo={setHoveredTodo} todos={todos} />
+        <ToDoList/>
       </div>
     </div>
     </Provider>
