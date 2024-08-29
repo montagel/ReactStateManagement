@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import './ToDoForm.css'
+import './ToDoForm.css';
+import { useContext } from 'react';
+import { TodoContext } from './ContextToDo';
 
 // Formular zum Erstellen eines To-Do-Elemnts
-function ToDoForm({ addTodo, todos }) {
+function ToDoForm() {
+
+  const { todos, addTodo } = useContext(TodoContext);
 
   // Eigenschaften eines To-Do-Elements
   const [title, setTitle] = useState('');
