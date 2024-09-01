@@ -6,32 +6,9 @@ import TodoDetails from './ToDoDetails';
 import { useContext } from 'react';
 import { TodoContext } from './ContextToDo';
 
-
-
 function App() {
 
-  const { setTodos } = useContext(TodoContext);
-
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      try {
-        const json = JSON.parse(e.target.result);
-        if (Array.isArray(json)) {
-          setTodos(json);
-        } else {
-          alert("Die hochgeladene Datei muss ein Array von To-Dos enthalten.");
-        }
-      } catch (error) {
-        alert("Fehler beim Lesen der Datei. Stelle sicher, dass es sich um gültiges JSON handelt.");
-      }
-    };
-
-    reader.readAsText(file);
-  };
-
+  const { handleFileUpload } = useContext(TodoContext);
 
   return (
     <div>
