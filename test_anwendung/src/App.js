@@ -12,17 +12,16 @@ function App() {
 
   return (
     <div>
-           <h1>Meine To-Do Liste</h1>
-
-    <input  className="file-upload-input" type="file" accept=".json" onChange={handleFileUpload} />
+      <h1>Meine To-Do Liste</h1>
+      <input className="file-upload-input" type="file" accept=".json" onChange={handleFileUpload} />
       <div className="todoApp">
         <div className="todo-container">
           <h3>neue Aufgabe</h3>
-          <ToDoForm/>
+          <ToDoForm />
           <h3>Detailinformationen</h3>
           <TodoDetails></TodoDetails>
         </div>
-        <ToDoList/>
+        <ToDoList />
       </div>
     </div>
   );

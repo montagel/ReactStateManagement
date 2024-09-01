@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react';
-
 export const TodoContext = createContext();
 
 export function TodoContextProvider ({ children }) {
@@ -17,6 +16,7 @@ export function TodoContextProvider ({ children }) {
     console.log("List item added")
   };
 
+  // ToDo-Elemente aus einer JSON-Datei auslesen und hinzufügen
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -36,8 +36,6 @@ export function TodoContextProvider ({ children }) {
 
     reader.readAsText(file);
   };
-
-  
 
     return (
       <TodoContext.Provider value={{ todos, hoveredTodo, setHoveredTodo, addTodo, handleFileUpload }}>
