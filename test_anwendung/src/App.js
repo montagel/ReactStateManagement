@@ -1,10 +1,10 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import ToDoForm from './ToDoForm';
 import ToDoList from './ToDoList';
 import TodoDetails from './ToDoDetails';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addTodo } from './redux/todo_slice';
 
 

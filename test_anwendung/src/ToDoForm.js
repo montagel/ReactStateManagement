@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ToDoForm.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodo } from './redux/todo_slice';
