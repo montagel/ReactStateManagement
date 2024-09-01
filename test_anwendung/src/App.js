@@ -43,7 +43,7 @@ function App() {
   return (
     <div>
       <h1>Meine To-Do Liste</h1>
-      <input type="file" accept=".json" onChange={handleFileUpload} />
+      <input  className="file-upload-input" type="file" accept=".json" onChange={handleFileUpload} />
       <div className="todoApp">
         <div className="todo-container">
           <h3>neue Aufgabe</h3>
