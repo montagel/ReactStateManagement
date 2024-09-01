@@ -8,15 +8,14 @@ function ToDoForm() {
 
   const { todos, addTodo } = useContext(TodoContext);
 
-  // Eigenschaften eines To-Do-Elements
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [duration, setDuration] = useState('');
-  const [importance, setImportance] = useState(1);
+  // Lokale Variablen, um die Eingabewerte zu speichern
+  let title = '';
+  let description = '';
+  let duration = '';
+  let importance = 1;
 
-  // Hinzufügen eines neuen To-Do mit den aktuell eingegebenen Werten
+  // Hinzufügen eines neuen To-Dos mit den aktuell eingegebenen Werten
   const handleSubmit = (e) => {
-    // Verhindert, dass die Seite beim Abschicken des Formulars neu geladen wird
     e.preventDefault();
 
     addTodo({
@@ -25,14 +24,11 @@ function ToDoForm() {
       description: description,
       duration: duration,
       importance: importance,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
 
-    // Eingabefelder im Formular werden nach dem Hinzufügen des To-Dos zurückgesetzt
-    setTitle('');
-    setDescription('');
-    setDuration('');
-    setImportance(1);
+    // Eingabefelder nach dem Hinzufügen des To-Dos zurücksetzen
+    e.target.reset();
   };
 
   return (
@@ -42,8 +38,7 @@ function ToDoForm() {
         <input
           type="text"
           placeholder="Aufgabentitel"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => (title = e.target.value)}
           required
           className="todo-input"
         />
@@ -52,32 +47,29 @@ function ToDoForm() {
         <label>Beschreibung</label>
         <textarea
           placeholder="Aufgabenbeschreibung"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => (description = e.target.value)}
           required
           className="todo-input"
         />
       </div>
       <div>
-        <label className='smallLabel'>Dauer (in Stunden)</label>
+        <label className="smallLabel">Dauer (in Stunden)</label>
         <input
           type="number"
           placeholder="Dauer"
           min="0"
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
+          onChange={(e) => (duration = e.target.value)}
           required
           className="todo-input"
         />
       </div>
       <div>
-        <label className='smallLabel'>Wichtigkeit (1-10)</label>
+        <label className="smallLabel">Wichtigkeit (1-10)</label>
         <input
           type="number"
           min="1"
           max="10"
-          value={importance}
-          onChange={(e) => setImportance(e.target.value)}
+          onChange={(e) => (importance = e.target.value)}
           required
           className="todo-input"
         />
