@@ -12,3 +12,13 @@ div {
   display: flex;
   flex-direction: column;
 }
+
+.file-upload-input {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 2px solid #4CAF50;
+  border-radius: 4px;
+  background-color: #9ff0a2;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+}
