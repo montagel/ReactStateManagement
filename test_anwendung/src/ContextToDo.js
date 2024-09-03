@@ -1,10 +1,32 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useContext } from 'react';
 
 export const TodoContext = createContext();
+export const TodoDetailsContext = createContext();
+
+
+
+export function TodoDetailsContextProvider({ children }) {
+  const setHoveredTodo = (todo) => {
+    dispatchHover({ type: 'SET_HOVERED_TODO', payload: todo });
+  };
+  const [hoverState, dispatchHover] = useReducer(hoverReducer, initialHoverState);
+
+  return (<TodoDetailsContext.Provider value={{
+    hoveredTodo: hoverState.hoveredTodo, setHoveredTodo,
+  }}>
+    {children}
+  </TodoDetailsContext.Provider>
+
+  );
+
+}
+
+
 
 export function TodoContextProvider({ children }) {
 
   const [state, dispatch] = useReducer(todoReducer, initialState);
+  //const [hoveredTodo, setHoveredTodo] = useContext(null);
 
   const setTodos = (todos) => {
     dispatch({ type: 'SET_TODOS', payload: todos });
@@ -17,11 +39,6 @@ export function TodoContextProvider({ children }) {
   const setSortOrder = (order) => {
     dispatch({ type: 'SET_SORT_ORDER', payload: order });
   };
-
-  const setHoveredTodo = (todo) => {
-    dispatch({ type: 'SET_HOVERED_TODO', payload: todo });
-  };
-
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -43,54 +60,18 @@ export function TodoContextProvider({ children }) {
     reader.readAsText(file);
   };
 
-
-  /*
-    // Liste der To-Dos   
-    const [todos, setTodos] = useState([]);
-
-    // Für das aktuell durch den User hervorgehobene To-Do-Element
-    const [hoveredTodo, setHoveredTodo] = useState(null);
-
-    // Funktion zum Hinzufügen eines neuen To-Dos zur Liste
-    const addTodo = (todo) => { 
-      const newTodos = [todo, ...todos];
-      setTodos(newTodos);
-      console.log("List item added")
-    }; */
-
-  // ToDo-Elemente aus einer JSON-Datei auslesen und hinzufügen
-  /*const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      try {
-        const json = JSON.parse(e.target.result);
-        if (Array.isArray(json)) {
-          setTodos(json);
-        } else {
-          alert("Die hochgeladene Datei muss ein Array von To-Dos enthalten.");
-        }
-      } catch (error) {
-        alert("Fehler beim Lesen der Datei. Stelle sicher, dass es sich um gültiges JSON handelt.");
-      }
-    };
-
-    reader.readAsText(file);
-  };*/
-
   return (
     <TodoContext.Provider value={{
       todos: state.todos,
-      filteredTodos: state.filteredTodos, importanceFilter: state.importanceFilter, hoveredTodo: state.hoveredTodo, sortOrder: state.sortOrder,
-      setTodos,
+      filteredTodos: state.filteredTodos, importanceFilter: state.importanceFilter, sortOrder: state.sortOrder
+      , setTodos,
       setImportanceFilter,
       setSortOrder,
-      setHoveredTodo,
       handleFileUpload
     }}>
       {children}
     </TodoContext.Provider>
+
   );
 };
 
@@ -100,7 +81,6 @@ const initialState = {
   filteredTodos: [],
   importanceFilter: 0,
   sortOrder: 'newest',
-  hoveredTodo: null
 };
 
 
@@ -134,11 +114,6 @@ function todoReducer(state, action) {
         sortOrder: 'newest',
         importanceFilter: 0
       };
-    case 'SET_HOVERED_TODO':
-      return {
-        ...state,
-        hoveredTodo: action.payload,
-      };
     default:
       return state;
   }
@@ -164,5 +139,21 @@ function sortAndFilterTodos(todos, sortOrder, importanceFilter) {
   return filteredTodos;
 }
 
+
+const initialHoverState = {
+  hoveredTodo: null
+};
+
+function hoverReducer(state, action) {
+  switch (action.type) {
+    case 'SET_HOVERED_TODO':
+      return {
+        ...state,
+        hoveredTodo: action.payload,
+      };
+    default:
+      return state;
+  }
+}
 
 
