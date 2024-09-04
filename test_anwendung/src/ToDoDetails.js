@@ -1,11 +1,8 @@
 import React from 'react';
 import './ToDoDetails.css';
-import { useContext } from 'react';
-import { TodoDetailsContext } from './ContextToDo';
 
 // Detailinformationen eines To-Do-Elements aus der Liste
-function TodoDetails() {
-  const { hoveredTodo } = useContext(TodoDetailsContext);
+function TodoDetails(hoveredTodo) {
 
   // Wenn kein To-Do-Element ausgewählt wurde, wird eine Standardnachricht angezeigt
   if (!hoveredTodo) {

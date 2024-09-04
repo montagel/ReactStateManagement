@@ -1,13 +1,8 @@
 import React from 'react';
 import './ToDoItem.css'
-import { useContext } from 'react';
-import { TodoDetailsContext } from './ContextToDo';
-
 
 // Einzelnes To-Do-Element mit den wichtigsten Informationen
-function ToDoItem({ todo }) {
-
-  const { setHoveredTodo } = useContext(TodoDetailsContext);
+function ToDoItem({ todo, setHoveredTodo }) {
 
   // Zum Formatieren des Datums und der Uhrzeit
   const formatDate = (isoString) => {

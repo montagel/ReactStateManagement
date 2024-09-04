@@ -3,7 +3,7 @@ import './ToDoList.css';
 import ToDoItem from './ToDoItem';
 import { TodoContext } from './ContextToDo';
 
-function ToDoList() {
+function ToDoList(setHoveredTodo) {
   const { filteredAndSortedTodos, importanceFilter, sortOrder, setImportanceFilter, setSortOrder } = useContext(TodoContext);
 
   // Filtern nach Wichtigkeit
@@ -45,7 +45,7 @@ function ToDoList() {
           <p>Noch keine Aufgaben</p>
         ) : (
           filteredAndSortedTodos.map((todo) => (
-            <ToDoItem key={todo.id} todo={todo} />
+            <ToDoItem key={todo.id} todo={todo} setHoveredTodo={setHoveredTodo}/>
           ))
         )}
       </div>

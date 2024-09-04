@@ -3,10 +3,12 @@ import React from 'react';
 import ToDoForm from './ToDoForm';
 import ToDoList from './ToDoList';
 import TodoDetails from './ToDoDetails';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { TodoContext } from './ContextToDo';
 
 function App() {
+
+  const [hoveredTodo, setHoveredTodo] = useState(null);
 
 
   return (
@@ -18,9 +20,9 @@ function App() {
           <h3>neue Aufgabe</h3>
           <ToDoForm />
           <h3>Detailinformationen</h3>
-          <TodoDetails></TodoDetails>
+          <TodoDetails hoveredTodo={hoveredTodo}></TodoDetails>
         </div>
-        <ToDoList />
+        <ToDoList setHoveredTodo={setHoveredTodo}/>
       </div>
     </div>
   );
