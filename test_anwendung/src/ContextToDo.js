@@ -1,24 +1,6 @@
 import { createContext, useReducer, useState } from 'react';
 
 export const TodoContext = createContext();
-export const TodoDetailsContext = createContext();
-
-
-
-export function TodoDetailsContextProvider({ children }) {
-
-  const [hoveredTodo, setHoveredTodo] = useState(null);
-  
-
-  return (<TodoDetailsContext.Provider value={{
-    hoveredTodo, setHoveredTodo,
-  }}>
-    {children}
-  </TodoDetailsContext.Provider>
-
-  );
-}
-
 
 
 export function TodoContextProvider({ children }) {

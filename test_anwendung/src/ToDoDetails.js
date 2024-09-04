@@ -2,7 +2,7 @@ import React from 'react';
 import './ToDoDetails.css';
 
 // Detailinformationen eines To-Do-Elements aus der Liste
-function TodoDetails(hoveredTodo) {
+function TodoDetails({hoveredTodo}) {
 
   // Wenn kein To-Do-Element ausgewählt wurde, wird eine Standardnachricht angezeigt
   if (!hoveredTodo) {
