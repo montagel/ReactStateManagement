@@ -4,6 +4,7 @@ import ToDoItem from './ToDoItem';
 import { TodoContext } from './ContextToDo';
 
 function ToDoList({setHoveredTodo}) {
+  
   const { filteredAndSortedTodos, importanceFilter, sortOrder, setImportanceFilter, setSortOrder } = useContext(TodoContext);
 
   // Filtern nach Wichtigkeit

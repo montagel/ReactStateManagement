@@ -10,7 +10,6 @@ function App() {
 
   const [hoveredTodo, setHoveredTodo] = useState(null);
 
-
   return (
     <div>
       <h1>Meine To-Do Liste</h1>
@@ -22,7 +21,7 @@ function App() {
           <h3>Detailinformationen</h3>
           <TodoDetails hoveredTodo={hoveredTodo}></TodoDetails>
         </div>
-        <ToDoList setHoveredTodo={setHoveredTodo}/>
+        <ToDoList setHoveredTodo={setHoveredTodo} />
       </div>
     </div>
   );
@@ -30,8 +29,9 @@ function App() {
 
 export default App;
 
+
 function UploadToDo() {
-  
+
   const { handleFileUpload } = useContext(TodoContext);
 
   return (
