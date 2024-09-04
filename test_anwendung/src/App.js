@@ -29,9 +29,7 @@ function App() {
 
 export default App;
 
-
-function UploadToDo() {
-
+const UploadToDo = React.memo(function() {
   const { handleFileUpload } = useContext(TodoContext);
 
   return (
@@ -40,4 +38,4 @@ function UploadToDo() {
       <input className="file-upload-input" type="file" accept=".json" onChange={handleFileUpload} />
     </div>
   );
-}
+});
