@@ -5,8 +5,7 @@ const initialState = {
   filteredAndSortedTodos: [],
   sortOrder: 'newest',
   importanceFilter: 0,
-  hoveredTodo: null,    // Für das aktuell durch den User hervorgehobene To-Do-Element
-
+  hoveredTodo: null,    
 };
 
 const ToDoSlice = createSlice({
@@ -15,19 +14,19 @@ const ToDoSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       state.todos.push(action.payload);
-      state.filteredAndSortedTodos = state.todos;
-      // Setze den Filter auf alle (0) und sortiere nach neuesten
       state.importanceFilter = 0;
       state.sortOrder = 'newest';
-      state.filteredAndSortedTodos = sortAndFilterTodos(state.todos, state.sortOrder, state.importanceFilter);
+      state.filteredAndSortedTodos = applyFilter(state.todos, state.importanceFilter);
+      state.filteredAndSortedTodos = applySort(state.filteredAndSortedTodos, state.sortOrder);
     },
     setSortOrder: (state, action) => {
       state.sortOrder = action.payload;
-      state.filteredAndSortedTodos = sortAndFilterTodos(state.todos, state.sortOrder, state.importanceFilter);
+      state.filteredAndSortedTodos = applySort(state.filteredAndSortedTodos, state.sortOrder);
     },
     setImportanceFilter: (state, action) => {
       state.importanceFilter = action.payload;
-      state.filteredAndSortedTodos = sortAndFilterTodos(state.todos, state.sortOrder, state.importanceFilter);
+      state.filteredAndSortedTodos = applyFilter(state.todos, state.importanceFilter);
+      state.filteredAndSortedTodos = applySort(state.filteredAndSortedTodos, state.sortOrder); 
     },
     setHoveredTodo: (state, action) => {
       state.hoveredTodo = action.payload;
@@ -35,24 +34,27 @@ const ToDoSlice = createSlice({
   },
 });
 
-const sortAndFilterTodos = (todos, sortOrder, importanceFilter) => {
-  let filteredTodos = todos;
-  if (importanceFilter !== 0) {
-    filteredTodos = todos.filter(todo => Number(todo.importance) === importanceFilter);
+// Funktion zum Filtern nach Wichtigkeit
+const applyFilter = (todos, importanceFilter) => {
+  if (importanceFilter === 0) {
+    return todos; // Keine Filterung, wenn Filter auf 0 steht
   }
-
-  if (sortOrder === 'DurationAscending') {
-    return filteredTodos.sort((a, b) => a.duration - b.duration);
-  } else if (sortOrder === 'DurationDescending') {
-    return filteredTodos.sort((a, b) => b.duration - a.duration);
-  } else if (sortOrder === 'newest') {
-    return filteredTodos.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  } else if (sortOrder === 'oldest') {
-    return filteredTodos.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-  }
-  return filteredTodos;
+  return todos.filter(todo => Number(todo.importance) === importanceFilter);
 };
 
-export const { addTodo, setSortOrder, setImportanceFilter, setHoveredTodo} = ToDoSlice.actions;
-export default ToDoSlice.reducer;
+// Funktion zum Sortieren
+const applySort = (todos, sortOrder) => {
+  if (sortOrder === 'DurationAscending') {
+    return [...todos].sort((a, b) => a.duration - b.duration);
+  } else if (sortOrder === 'DurationDescending') {
+    return [...todos].sort((a, b) => b.duration - a.duration);
+  } else if (sortOrder === 'newest') {
+    return [...todos].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  } else if (sortOrder === 'oldest') {
+    return [...todos].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  }
+  return todos;
+};
 
+export const { addTodo, setSortOrder, setImportanceFilter, setHoveredTodo } = ToDoSlice.actions;
+export default ToDoSlice.reducer;
