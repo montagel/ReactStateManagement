@@ -8,12 +8,11 @@ import { TodoContext } from './ContextToDo';
 
 function App() {
 
-  const { handleFileUpload } = useContext(TodoContext);
 
   return (
     <div>
       <h1>Meine To-Do Liste</h1>
-      <input className="file-upload-input" type="file" accept=".json" onChange={handleFileUpload} />
+      <UploadToDo></UploadToDo>
       <div className="todoApp">
         <div className="todo-container">
           <h3>neue Aufgabe</h3>
@@ -28,3 +27,15 @@ function App() {
 }
 
 export default App;
+
+function UploadToDo() {
+  
+  const { handleFileUpload } = useContext(TodoContext);
+
+  return (
+    <div>
+      <h1>Meine To-Do Liste</h1>
+      <input className="file-upload-input" type="file" accept=".json" onChange={handleFileUpload} />
+    </div>
+  );
+}

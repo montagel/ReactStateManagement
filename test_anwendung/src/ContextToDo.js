@@ -1,4 +1,4 @@
-import { createContext, useReducer, useContext } from 'react';
+import { createContext, useReducer, useState } from 'react';
 
 export const TodoContext = createContext();
 export const TodoDetailsContext = createContext();
@@ -6,19 +6,17 @@ export const TodoDetailsContext = createContext();
 
 
 export function TodoDetailsContextProvider({ children }) {
-  const setHoveredTodo = (todo) => {
-    dispatchHover({ type: 'SET_HOVERED_TODO', payload: todo });
-  };
-  const [hoverState, dispatchHover] = useReducer(hoverReducer, initialHoverState);
+
+  const [hoveredTodo, setHoveredTodo] = useState(null);
+  
 
   return (<TodoDetailsContext.Provider value={{
-    hoveredTodo: hoverState.hoveredTodo, setHoveredTodo,
+    hoveredTodo, setHoveredTodo,
   }}>
     {children}
   </TodoDetailsContext.Provider>
 
   );
-
 }
 
 
@@ -26,7 +24,6 @@ export function TodoDetailsContextProvider({ children }) {
 export function TodoContextProvider({ children }) {
 
   const [state, dispatch] = useReducer(todoReducer, initialState);
-  //const [hoveredTodo, setHoveredTodo] = useContext(null);
 
   const setTodos = (todos) => {
     dispatch({ type: 'SET_TODOS', payload: todos });
@@ -63,7 +60,7 @@ export function TodoContextProvider({ children }) {
   return (
     <TodoContext.Provider value={{
       todos: state.todos,
-      filteredTodos: state.filteredTodos, importanceFilter: state.importanceFilter, sortOrder: state.sortOrder
+      filteredAndSortedTodos: state.filteredAndSortedTodos, importanceFilter: state.importanceFilter, sortOrder: state.sortOrder
       , setTodos,
       setImportanceFilter,
       setSortOrder,
@@ -78,11 +75,10 @@ export function TodoContextProvider({ children }) {
 
 const initialState = {
   todos: [],
-  filteredTodos: [],
+  filteredAndSortedTodos: [],
   importanceFilter: 0,
   sortOrder: 'newest',
 };
-
 
 function todoReducer(state, action) {
   switch (action.type) {
@@ -90,7 +86,7 @@ function todoReducer(state, action) {
       return {
         ...state,
         todos: action.payload,
-        filteredTodos: sortAndFilterTodos(action.payload, 'newest', 0),
+        filteredAndSortedTodos: sortTodos(filterTodos(action.payload, 0), 'newest'),
         sortOrder: 'newest',
         importanceFilter: 0
       };
@@ -98,19 +94,20 @@ function todoReducer(state, action) {
       return {
         ...state,
         importanceFilter: action.payload,
-        filteredTodos: sortAndFilterTodos(state.todos, state.sortOrder, action.payload),
+        filteredAndSortedTodos: sortTodos(filterTodos(state.todos, action.payload), state.sortOrder),
       };
     case 'SET_SORT_ORDER':
       return {
         ...state,
         sortOrder: action.payload,
-        filteredTodos: sortAndFilterTodos(state.todos, action.payload, state.importanceFilter),
+        filteredAndSortedTodos: sortTodos(state.filteredAndSortedTodos, action.payload),
       };
     case 'ADD_TODOS_FROM_FILE':
+      const updatedTodos = [...action.payload, ...state.todos];
       return {
         ...state,
-        todos: [...action.payload, ...state.todos],
-        filteredTodos: sortAndFilterTodos([...action.payload, ...state.todos], 'newest', 0),
+        todos: updatedTodos,
+        filteredAndSortedTodos: sortTodos(filterTodos(updatedTodos, 0), 'newest'),
         sortOrder: 'newest',
         importanceFilter: 0
       };
@@ -119,41 +116,25 @@ function todoReducer(state, action) {
   }
 }
 
-function sortAndFilterTodos(todos, sortOrder, importanceFilter) {
-  let filteredTodos = todos;
-
-  if (importanceFilter !== 0) {
-    filteredTodos = todos.filter(todo => Number(todo.importance) === importanceFilter);
-  }
-
-  if (sortOrder === 'DurationAscending') {
-    return filteredTodos.sort((a, b) => a.duration - b.duration);
-  } else if (sortOrder === 'DurationDescending') {
-    return filteredTodos.sort((a, b) => b.duration - a.duration);
-  } else if (sortOrder === 'newest') {
-    return filteredTodos.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  } else if (sortOrder === 'oldest') {
-    return filteredTodos.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-  }
-
-  return filteredTodos;
+function filterTodos(todos, importanceFilter) {
+  if (importanceFilter === 0) return todos;
+  return todos.filter(todo => Number(todo.importance) === importanceFilter);
 }
 
-
-const initialHoverState = {
-  hoveredTodo: null
-};
-
-function hoverReducer(state, action) {
-  switch (action.type) {
-    case 'SET_HOVERED_TODO':
-      return {
-        ...state,
-        hoveredTodo: action.payload,
-      };
+function sortTodos(todos, sortOrder) {
+  switch (sortOrder) {
+    case 'DurationAscending':
+      return todos.sort((a, b) => a.duration - b.duration);
+    case 'DurationDescending':
+      return todos.sort((a, b) => b.duration - a.duration);
+    case 'newest':
+      return todos.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    case 'oldest':
+      return todos.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
     default:
-      return state;
+      return todos;
   }
 }
+
 
 

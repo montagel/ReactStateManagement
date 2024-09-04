@@ -4,7 +4,7 @@ import ToDoItem from './ToDoItem';
 import { TodoContext } from './ContextToDo';
 
 function ToDoList() {
-  const { filteredTodos, importanceFilter, sortOrder, setImportanceFilter, setSortOrder } = useContext(TodoContext);
+  const { filteredAndSortedTodos, importanceFilter, sortOrder, setImportanceFilter, setSortOrder } = useContext(TodoContext);
 
   // Filtern nach Wichtigkeit
   const handleImportanceChange = (e) => {
@@ -41,10 +41,10 @@ function ToDoList() {
             </select>
           </div>
         </div>
-        {filteredTodos.length === 0 ? (
+        {filteredAndSortedTodos.length === 0 ? (
           <p>Noch keine Aufgaben</p>
         ) : (
-          filteredTodos.map((todo) => (
+          filteredAndSortedTodos.map((todo) => (
             <ToDoItem key={todo.id} todo={todo} />
           ))
         )}
