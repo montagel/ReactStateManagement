@@ -34,7 +34,6 @@ const UploadToDo = React.memo(function() {
 
   return (
     <div>
-      <h1>Meine To-Do Liste</h1>
       <input className="file-upload-input" type="file" accept=".json" onChange={handleFileUpload} />
     </div>
   );
