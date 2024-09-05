@@ -5,7 +5,7 @@ import useTodoStore from './ToDoStore';
 // Einzelnes To-Do-Element mit den wichtigsten Informationen
 function ToDoItem({ todo }) {
 
-  const { setHoveredTodo } = useTodoStore();
+  const setHoveredTodo = useTodoStore((state) => state.setHoveredTodo);
 
 
   // Zum Formatieren des Datums und der Uhrzeit

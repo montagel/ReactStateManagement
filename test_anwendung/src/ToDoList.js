@@ -5,13 +5,15 @@ import useTodoStore from './ToDoStore';
 
 // Liste mit Sortier- und Filtermöglichkeiten
 function ToDoList() {
-
-   const importanceFilter = useTodoStore((state) => state.importanceFilter);
-   const sortOrder = useTodoStore((state) => state.sortOrder);
-   const filteredAndSortedTodos = useTodoStore((state) => state.filteredAndSortedTodos);
-   const setImportanceFilter = useTodoStore((state) => state.setImportanceFilter);
-   const setHoveredTodo = useTodoStore((state) => state.setHoveredTodo);
-   const setSortOrder = useTodoStore((state) => state.setSortOrder)
+  const { importanceFilter, sortOrder, filteredAndSortedTodos, setImportanceFilter, setSortOrder, setHoveredTodo } = useTodoStore((state) => ({
+    importanceFilter: state.importanceFilter,
+    sortOrder: state.sortOrder,
+    filteredAndSortedTodos: state.filteredAndSortedTodos,
+    setImportanceFilter: state.setImportanceFilter,
+    setSortOrder: state.setSortOrder,
+    setHoveredTodo: state.setHoveredTodo,
+ }));
+ 
 
   return (
     <div>
