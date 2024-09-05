@@ -3,21 +3,11 @@ import React, { useState } from 'react';
 import ToDoForm from './ToDoForm';
 import ToDoList from './ToDoList';
 import TodoDetails from './ToDoDetails';
-
+import useTodoStore from './ToDoStore';
 
 function App() {
 
-  // Liste der To-Dos
-  const [todos, setTodos] = useState([]);
-  // Für das aktuell durch den User hervorgehobene To-Do-Element
-  const [hoveredTodo, setHoveredTodo] = useState(null);
-
-  // Funktion zum Hinzufügen eines neuen To-Dos zur Liste
-  const addTodo = (todo) => {
-    // Ein neues To-Do wird an den Anfang der bestehenden Liste angefügt
-    const newTodos = [todo, ...todos];
-    setTodos(newTodos);
-  };
+  const addTodo = useTodoStore((state) => state.addTodo);
 
   // Funktion zum Verarbeiten der hochgeladenen JSON-Datei
   const handleFileUpload = (event) => {
@@ -28,7 +18,7 @@ function App() {
       try {
         const json = JSON.parse(e.target.result);
         if (Array.isArray(json)) {
-          setTodos(json);
+          addTodo(json);
         } else {
           alert("Die hochgeladene Datei muss ein Array von To-Dos enthalten.");
         }
@@ -47,11 +37,11 @@ function App() {
       <div className="todoApp">
         <div className="todo-container">
           <h3>neue Aufgabe</h3>
-          <ToDoForm addTodo={addTodo} todos={todos} />
+          <ToDoForm  />
           <h3>Detailinformationen</h3>
-          <TodoDetails todo={hoveredTodo} ></TodoDetails>
+          <TodoDetails></TodoDetails>
         </div>
-        <ToDoList setHoveredTodo={setHoveredTodo} todos={todos} />
+        <ToDoList/>
       </div>
     </div>
   );

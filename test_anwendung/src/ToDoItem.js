@@ -1,8 +1,12 @@
 import React from 'react';
 import './ToDoItem.css'
+import useTodoStore from './ToDoStore';
 
 // Einzelnes To-Do-Element mit den wichtigsten Informationen
-function ToDoItem({ todo, setHoveredTodo }) {
+function ToDoItem({ todo }) {
+
+  const { setHoveredTodo } = useTodoStore();
+
 
   // Zum Formatieren des Datums und der Uhrzeit
   const formatDate = (isoString) => {
@@ -32,4 +36,4 @@ function ToDoItem({ todo, setHoveredTodo }) {
   );
 }
 
-export default ToDoItem;
+export default React.memo(ToDoItem);

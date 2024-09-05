@@ -1,7 +1,11 @@
 import React from 'react';
 import './ToDoForm.css';
+import useTodoStore from './ToDoStore';
 
-function ToDoForm({ addTodo, todos }) {
+function ToDoForm() {
+
+  const addTodo = useTodoStore((state) => state.addTodo);
+  const todos = useTodoStore((state) => state.todos);
   // Lokale Variablen, um die Eingabewerte zu speichern
   let title = '';
   let description = '';
