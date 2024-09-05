@@ -1,7 +1,13 @@
 import React from 'react';
-import './ToDoForm.css';
+import './ToDoForm.css';import { useSetAtom, useAtomValue } from 'jotai';
+import { todosAtom, addTodo  } from './ToDoAtoms';
 
-function ToDoForm({ addTodo, todos }) {
+function ToDoForm() {
+  // Lese den aktuellen Zustand der Todos
+  const todos = useAtomValue(todosAtom);
+  // Verwende die Action addTodo, um ein neues Todo hinzuzufügen
+  const addNewTodo = useSetAtom(addTodo);
+
   // Lokale Variablen, um die Eingabewerte zu speichern
   let title = '';
   let description = '';
@@ -12,18 +18,22 @@ function ToDoForm({ addTodo, todos }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    addTodo({
-      id: todos.length,
-      title: title,
-      description: description,
-      duration: duration,
-      importance: importance,
+    const newTodo = {
+      id: todos.length,  // Länge der Todos für die ID
+      title,
+      description,
+      duration,
+      importance,
       createdAt: new Date().toISOString(),
-    });
+    };
+
+    // Verwende addNewTodo, um das neue Todo hinzuzufügen
+    addNewTodo(newTodo);
 
     // Eingabefelder nach dem Hinzufügen des To-Dos zurücksetzen
     e.target.reset();
   };
+
 
   return (
     <form className="todo-form" onSubmit={handleSubmit}>
