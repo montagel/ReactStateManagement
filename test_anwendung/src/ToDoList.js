@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './ToDoList.css';
 import ToDoItem from './ToDoItem';
 import { useAtom } from 'jotai';
@@ -12,8 +12,6 @@ function ToDoList() {
   const [sortOrder, setSortOrder] = useAtom(sortOrderAtom);
   const [filteredAndSortedTodos] = useAtom(filteredAndSortedTodosAtom);
  
-
-
   return (
     <div>
       <h3>Aufgabenliste</h3>
