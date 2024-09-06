@@ -6,7 +6,7 @@ import { importanceFilterAtom, sortOrderAtom, filteredAndSortedTodosAtom} from '
 
 
 // Liste mit Sortier- und Filtermöglichkeiten
-function ToDoList({ setHoveredTodo }) {
+function ToDoList() {
 
   const [importanceFilter, setImportanceFilter] = useAtom(importanceFilterAtom);
   const [sortOrder, setSortOrder] = useAtom(sortOrderAtom);
@@ -41,7 +41,7 @@ function ToDoList({ setHoveredTodo }) {
           <p>Noch keine Aufgaben</p>
         ) : (
           filteredAndSortedTodos.map((todo) => (
-            <ToDoItem key={todo.id} todo={todo} setHoveredTodo={setHoveredTodo} />
+            <ToDoItem key={todo.id} todo={todo}/>
           ))
         )}
       </div>

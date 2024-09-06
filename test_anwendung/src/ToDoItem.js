@@ -1,10 +1,14 @@
 import React from 'react';
-import './ToDoItem.css'
+import './ToDoItem.css';
+import { useAtom } from 'jotai';
+import { hoveredTodoAtom } from './ToDoAtoms'
+
 
 // Einzelnes To-Do-Element mit den wichtigsten Informationen
-function ToDoItem({ todo, setHoveredTodo }) {
+function ToDoItem({ todo }) {
 
-  // Zum Formatieren des Datums und der Uhrzeit
+  const [, setHoveredTodo] = useAtom(hoveredTodoAtom);
+  
   const formatDate = (isoString) => {
     const date = new Date(isoString);
     const formattedDate = date.toLocaleDateString('de-DE', {

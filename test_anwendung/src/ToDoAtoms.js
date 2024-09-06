@@ -6,6 +6,7 @@ export const sortOrderAtom = atom('newest');
 export const importanceFilterAtom = atom(0);
 export const hoveredTodoAtom = atom(null);
 
+// abgeleiteter Atom für die gefilterten und sortierten Todos
 export const filteredAndSortedTodosAtom = atom((get) => {
     const todos = get(todosAtom);
     const importanceFilter = get(importanceFilterAtom);
@@ -15,33 +16,19 @@ export const filteredAndSortedTodosAtom = atom((get) => {
     return applySort(filteredTodos, sortOrder);
 });
 
-// Actions
-
 // Action zum Hinzufügen eines neuen Todos
-export const addTodso = (get, set, newTodo) => {
-    const currentTodos = get(todosAtom);  // Aktuelle Todos holen
-    // Füge das neue Todo hinzu
-    set(todosAtom, [...currentTodos, newTodo]);
-
-
-};
-
 export const addTodo = atom(
     null,
     (get, set, newTodo) => {
         const currentTodos = get(todosAtom);
         set(todosAtom, [...currentTodos, newTodo]);
-        // Setze den Filter auf 0 (alle Todos)
         set(importanceFilterAtom, 0);
-
-        // Setze die Sortierreihenfolge auf 'newest'
         set(sortOrderAtom, 'newest');
     }
 );
 
+// Hilfsfunktionen zum Filtern und Sortieren
 
-
-// Funktionen zum Filtern und Sortieren
 const applyFilter = (todos, importanceFilter) => {
     if (importanceFilter === 0) {
         return todos; // Keine Filterung, wenn Filter auf 0 steht
