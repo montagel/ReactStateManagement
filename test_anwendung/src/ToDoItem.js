@@ -36,4 +36,4 @@ function ToDoItem({ todo }) {
   );
 }
 
-export default ToDoItem;
+export default React.memo(ToDoItem);
