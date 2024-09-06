@@ -1,13 +1,13 @@
 import React from 'react';
 import './ToDoItem.css';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { hoveredTodoAtom } from './ToDoAtoms'
 
 
 // Einzelnes To-Do-Element mit den wichtigsten Informationen
 function ToDoItem({ todo }) {
 
-  const [, setHoveredTodo] = useAtom(hoveredTodoAtom);
+  const setHoveredTodo = useSetAtom(hoveredTodoAtom);
   
   const formatDate = (isoString) => {
     const date = new Date(isoString);

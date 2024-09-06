@@ -1,7 +1,7 @@
 import React from 'react';
 import './ToDoList.css';
 import ToDoItem from './ToDoItem';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { importanceFilterAtom, sortOrderAtom, filteredAndSortedTodosAtom} from './ToDoAtoms'
 
 
@@ -10,7 +10,7 @@ function ToDoList() {
 
   const [importanceFilter, setImportanceFilter] = useAtom(importanceFilterAtom);
   const [sortOrder, setSortOrder] = useAtom(sortOrderAtom);
-  const [filteredAndSortedTodos] = useAtom(filteredAndSortedTodosAtom);
+  const filteredAndSortedTodos = useAtomValue(filteredAndSortedTodosAtom);
  
   return (
     <div>

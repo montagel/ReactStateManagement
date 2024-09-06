@@ -4,9 +4,7 @@ import { todosAtom, addTodo  } from './ToDoAtoms';
 
 function ToDoForm() {
 
-  // Lese den aktuellen Zustand der Todos
   const todos = useAtomValue(todosAtom);
-  // Verwende die Action addTodo, um ein neues Todo hinzuzufügen
   const addNewTodo = useSetAtom(addTodo);
 
   // Lokale Variablen, um die Eingabewerte zu speichern

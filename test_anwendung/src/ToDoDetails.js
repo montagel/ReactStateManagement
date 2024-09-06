@@ -1,12 +1,12 @@
 import React from 'react';
 import './ToDoDetails.css';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { hoveredTodoAtom } from './ToDoAtoms'
 
 
 // Detailinformationen eines To-Do-Elements aus der Liste
-function TodoDetails({ todo }) {
-  const [hoveredTodo] = useAtom(hoveredTodoAtom);
+function TodoDetails() {
+  const hoveredTodo = useAtomValue(hoveredTodoAtom);
 
   // Wenn kein To-Do-Element ausgewählt wurde, wird eine Standardnachricht angezeigt
   if (!hoveredTodo) {
