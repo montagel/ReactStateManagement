@@ -1,5 +1,5 @@
 
-import create from 'zustand';
+import {create} from 'zustand'
 
 // Funktion zum Filtern nach Wichtigkeit
 const applyFilter = (todos, importanceFilter) => {
