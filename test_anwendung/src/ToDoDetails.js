@@ -13,7 +13,7 @@ function TodoDetails({ todo }) {
     <div className="todo-details">
       <h3>Details zu: {todo.title}</h3>
       <p><strong>Beschreibung:</strong> {todo.description}</p>
-      <p><strong>Dauer:</strong> {todo.duration} Minuten</p>
+      <p><strong>Dauer:</strong> {todo.duration} h</p>
       <p><strong>Wichtigkeit:</strong> {todo.importance} / 10</p>
     </div>
   );
