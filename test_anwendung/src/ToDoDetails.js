@@ -4,7 +4,7 @@ import useTodoStore from './ToDoStore';
 
 // Detailinformationen eines To-Do-Elements aus der Liste
 function TodoDetails() {
-  const hoveredTodo= useTodoStore((state) => state.hoveredTodo);
+  const hoveredTodo = useTodoStore((state) => state.hoveredTodo);
 
   // Wenn kein To-Do-Element ausgewählt wurde, wird eine Standardnachricht angezeigt
   if (!hoveredTodo) {

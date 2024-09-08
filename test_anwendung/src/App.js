@@ -40,7 +40,7 @@ function App() {
       <div className="todoApp">
         <div className="todo-container">
           <h3>neue Aufgabe</h3>
-          <ToDoForm  />
+          <ToDoForm/>
           <h3>Detailinformationen</h3>
           <TodoDetails></TodoDetails>
         </div>

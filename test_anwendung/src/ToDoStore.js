@@ -31,38 +31,26 @@ const useTodoStore = create((set, get) => ({
   hoveredTodo: null,
 
   addTodo: (todo) => {
-    const updatedTodos = [...get().todos, todo];
-    const importanceFilter = 0;
-    const sortOrder = 'newest';
-    
-    const filteredTodos = applyFilter(updatedTodos, importanceFilter);
-    const sortedTodos = applySort(filteredTodos, sortOrder);
-    
+    const updatedTodos = [...get().todos, todo];    
     set({
       todos: updatedTodos,
-      filteredAndSortedTodos: sortedTodos,
-      importanceFilter: importanceFilter,
-      sortOrder: sortOrder
+      filteredAndSortedTodos: applySort(applyFilter(updatedTodos, 0), 'newest'),
+      importanceFilter: 0,
+      sortOrder: 'newest'
     });
   },
 
   setSortOrder: (sortOrder) => {
-    const filteredTodos = applyFilter(get().todos, get().importanceFilter);
-    const sortedTodos = applySort(filteredTodos, sortOrder);
-    
     set({
       sortOrder: sortOrder,
-      filteredAndSortedTodos: sortedTodos
+      filteredAndSortedTodos: applySort(get().filteredAndSortedTodos, sortOrder)
     });
   },
 
   setImportanceFilter: (importanceFilter) => {
-    const filteredTodos = applyFilter(get().todos, importanceFilter);
-    const sortedTodos = applySort(filteredTodos, get().sortOrder);
-    
     set({
       importanceFilter: importanceFilter,
-      filteredAndSortedTodos: sortedTodos
+      filteredAndSortedTodos: applySort(applyFilter(get().todos, importanceFilter), get().sortOrder),
     });
   },
 
