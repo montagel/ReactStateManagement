@@ -25,7 +25,7 @@ function ToDoList() {
             value={importanceFilter}
             onChange={(e) => setImportanceFilter(Number(e.target.value))} 
           />
-          <div className="sort-by-duration">
+          <div className="sortOrder">
             <label>Sortieren: </label>
             <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
               <option value="DurationAscending">nach Dauer aufsteigend</option>

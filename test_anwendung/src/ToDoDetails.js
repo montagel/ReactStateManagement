@@ -17,7 +17,7 @@ function TodoDetails() {
     <div className="todo-details">
       <h3>Details zu: {hoveredTodo.title}</h3>
       <p><strong>Beschreibung:</strong> {hoveredTodo.description}</p>
-      <p><strong>Dauer:</strong> {hoveredTodo.duration} Minuten</p>
+      <p><strong>Dauer:</strong> {hoveredTodo.duration} h</p>
       <p><strong>Wichtigkeit:</strong> {hoveredTodo.importance} / 10</p>
     </div>
   );
