@@ -1,4 +1,3 @@
-
 import {create} from 'zustand'
 
 // Funktion zum Filtern nach Wichtigkeit
