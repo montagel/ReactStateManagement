@@ -1,7 +1,5 @@
 import { createContext, useReducer } from 'react';
-
 export const TodoContext = createContext();
-
 
 export function TodoContextProvider({ children }) {
 
