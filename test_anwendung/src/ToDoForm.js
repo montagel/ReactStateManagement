@@ -6,7 +6,7 @@ import { TodoContext } from './ContextToDo';
 // Formular zum Erstellen eines To-Do-Elemnts
 function ToDoForm() {
 
-  const { todos, setTodos } = useContext(TodoContext);
+  const { todos, addTodo } = useContext(TodoContext);
 
   // Lokale Variablen, um die Eingabewerte zu speichern
   let title = '';
@@ -27,7 +27,7 @@ function ToDoForm() {
       createdAt: new Date().toISOString(),
     };
 
-    setTodos([...todos, newTodo]);
+    addTodo(newTodo);
 
     // Eingabefelder nach dem Hinzufügen des To-Dos zurücksetzen
     e.target.reset();

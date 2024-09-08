@@ -7,8 +7,8 @@ export function TodoContextProvider({ children }) {
 
   const [state, dispatch] = useReducer(todoReducer, initialState);
 
-  const setTodos = (todos) => {
-    dispatch({ type: 'SET_TODOS', payload: todos });
+  const addTodo = (todo) => {
+    dispatch({ type: 'ADD_TODO', payload: todo });
   };
 
   const setImportanceFilter = (importance) => {
@@ -19,30 +19,10 @@ export function TodoContextProvider({ children }) {
     dispatch({ type: 'SET_SORT_ORDER', payload: order });
   };
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      try {
-        const json = JSON.parse(e.target.result);
-        if (Array.isArray(json)) {
-          dispatch({ type: 'ADD_TODOS_FROM_FILE', payload: json });
-        } else {
-          alert("Die hochgeladene Datei muss ein Array von To-Dos enthalten.");
-        }
-      } catch (error) {
-        alert("Fehler beim Lesen der Datei. Stelle sicher, dass es sich um gültiges JSON handelt.");
-      }
-    };
-
-    reader.readAsText(file);
-  };
-
   return (
     <TodoContext.Provider value={{todos: state.todos, filteredAndSortedTodos: state.filteredAndSortedTodos, 
     importanceFilter: state.importanceFilter, sortOrder: state.sortOrder, 
-      setTodos, setImportanceFilter, setSortOrder, handleFileUpload
+      addTodo, setImportanceFilter, setSortOrder
     }}>
       {children}
     </TodoContext.Provider>
@@ -59,11 +39,12 @@ const initialState = {
 
 function todoReducer(state, action) {
   switch (action.type) {
-    case 'SET_TODOS':
+    case 'ADD_TODO':
+      const updatedTodos = [...state.todos, action.payload];
       return {
         ...state,
-        todos: action.payload,
-        filteredAndSortedTodos: sortTodos(filterTodos(action.payload, 0), 'newest'),
+        todos: updatedTodos,
+        filteredAndSortedTodos: sortTodos(filterTodos(updatedTodos, 0), 'newest'),
         sortOrder: 'newest',
         importanceFilter: 0
       };
@@ -78,15 +59,6 @@ function todoReducer(state, action) {
         ...state,
         sortOrder: action.payload,
         filteredAndSortedTodos: sortTodos(state.filteredAndSortedTodos, action.payload),
-      };
-    case 'ADD_TODOS_FROM_FILE':
-      const updatedTodos = [...action.payload, ...state.todos];
-      return {
-        ...state,
-        todos: updatedTodos,
-        filteredAndSortedTodos: sortTodos(filterTodos(updatedTodos, 0), 'newest'),
-        sortOrder: 'newest',
-        importanceFilter: 0
       };
     default:
       return state;
