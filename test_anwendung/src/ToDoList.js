@@ -32,7 +32,7 @@ function ToDoList({setHoveredTodo}) {
             value={importanceFilter}
             onChange={handleImportanceChange}
           />
-          <div className="sort-by-duration">
+          <div className="sortOrder">
             <label>Sortieren: </label>
             <select value={sortOrder} onChange={handleSortOrderChange}>
               <option value="DurationAscending">nach Dauer aufsteigend</option>

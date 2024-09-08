@@ -40,20 +40,15 @@ export function TodoContextProvider({ children }) {
   };
 
   return (
-    <TodoContext.Provider value={{
-      todos: state.todos,
-      filteredAndSortedTodos: state.filteredAndSortedTodos, importanceFilter: state.importanceFilter, sortOrder: state.sortOrder
-      , setTodos,
-      setImportanceFilter,
-      setSortOrder,
-      handleFileUpload
+    <TodoContext.Provider value={{todos: state.todos, filteredAndSortedTodos: state.filteredAndSortedTodos, 
+    importanceFilter: state.importanceFilter, sortOrder: state.sortOrder, 
+      setTodos, setImportanceFilter, setSortOrder, handleFileUpload
     }}>
       {children}
     </TodoContext.Provider>
 
   );
 };
-
 
 const initialState = {
   todos: [],
