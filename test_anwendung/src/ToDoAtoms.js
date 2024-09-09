@@ -16,7 +16,7 @@ export const filteredAndSortedTodosAtom = atom((get) => {
     return applySort(filteredTodos, sortOrder);
 });
 
-// Action zum Hinzufügen eines neuen Todos
+// zum Hinzufügen eines neuen Todos
 export const addTodo = atom(
     null,
     (get, set, newTodo) => {
