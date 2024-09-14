@@ -5,16 +5,12 @@ import useTodoStore from './ToDoStore';
 
 // Liste mit Sortier- und Filtermöglichkeiten
 function ToDoList() {
-  const { importanceFilter, sortOrder, filteredAndSortedTodos, setImportanceFilter, setSortOrder, setHoveredTodo } = useTodoStore((state) => ({
-    importanceFilter: state.importanceFilter,
-    sortOrder: state.sortOrder,
-    filteredAndSortedTodos: state.filteredAndSortedTodos,
-    setImportanceFilter: state.setImportanceFilter,
-    setSortOrder: state.setSortOrder,
-    setHoveredTodo: state.setHoveredTodo,
- }));
- 
-
+  const filteredAndSortedTodos = useTodoStore(state => state.filteredAndSortedTodos);
+  const importanceFilter = useTodoStore(state => state.importanceFilter);
+  const sortOrder = useTodoStore(state => state.sortOrder);
+  const setImportanceFilter = useTodoStore(state => state.setImportanceFilter);
+  const setSortOrder = useTodoStore(state => state.setSortOrder);
+  
   return (
     <div>
       <h3>Aufgabenliste</h3>
@@ -42,7 +38,7 @@ function ToDoList() {
           <p>Noch keine Aufgaben</p>
         ) : (
           filteredAndSortedTodos.map((todo) => (
-            <ToDoItem key={todo.id} todo={todo} setHoveredTodo={setHoveredTodo} />
+            <ToDoItem key={todo.id} todo={todo}/>
           ))
         )}
       </div>
