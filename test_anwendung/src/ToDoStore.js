@@ -1,7 +1,7 @@
 import {create} from 'zustand'
 
 // Zustand-Store 
-const useTodoStore = create((set, get) => ({
+const useTodoStore = create((set) => ({
   todos: [],
   filteredAndSortedTodos: [],
   sortOrder: 'newest',
@@ -9,27 +9,29 @@ const useTodoStore = create((set, get) => ({
   hoveredTodo: null,
 
   addTodo: (todo) => {
-    const updatedTodos = [...get().todos, todo];    
-    set({
-      todos: updatedTodos,
-      filteredAndSortedTodos: applySort(applyFilter(updatedTodos, 0), 'newest'),
-      importanceFilter: 0,
-      sortOrder: 'newest'
+    set((state) => {
+      const updatedTodos = [...state.todos, todo];    
+      return {
+        todos: updatedTodos,
+        filteredAndSortedTodos: applySort(applyFilter(updatedTodos, state.importanceFilter), state.sortOrder),
+        importanceFilter: 0,
+        sortOrder: 'newest'
+      };
     });
   },
 
   setSortOrder: (sortOrder) => {
-    set({
+    set((state) => ({
       sortOrder: sortOrder,
-      filteredAndSortedTodos: applySort(get().filteredAndSortedTodos, sortOrder)
-    });
+      filteredAndSortedTodos: applySort(state.filteredAndSortedTodos, sortOrder)
+    }));
   },
 
   setImportanceFilter: (importanceFilter) => {
-    set({
+    set((state) => ({
       importanceFilter: importanceFilter,
-      filteredAndSortedTodos: applySort(applyFilter(get().todos, importanceFilter), get().sortOrder),
-    });
+      filteredAndSortedTodos: applySort(applyFilter(state.todos, importanceFilter), state.sortOrder),
+    }));
   },
 
   setHoveredTodo: (todo) => {
@@ -62,3 +64,6 @@ const applySort = (todos, sortOrder) => {
   }
   return todos;
 };
+
+
+
