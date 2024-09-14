@@ -1,6 +1,7 @@
 import { createContext, useReducer } from 'react';
-export const TodoContext = createContext();
 
+// Context
+export const TodoContext = createContext();
 export function TodoContextProvider({ children }) {
 
   const [state, dispatch] = useReducer(todoReducer, initialState);
@@ -18,8 +19,9 @@ export function TodoContextProvider({ children }) {
   };
 
   return (
-    <TodoContext.Provider value={{todos: state.todos, filteredAndSortedTodos: state.filteredAndSortedTodos, 
-    importanceFilter: state.importanceFilter, sortOrder: state.sortOrder, 
+    <TodoContext.Provider value={{
+      todos: state.todos, filteredAndSortedTodos: state.filteredAndSortedTodos,
+      importanceFilter: state.importanceFilter, sortOrder: state.sortOrder,
       addTodo, setImportanceFilter, setSortOrder
     }}>
       {children}
@@ -28,6 +30,7 @@ export function TodoContextProvider({ children }) {
   );
 };
 
+// Reducer 
 const initialState = {
   todos: [],
   filteredAndSortedTodos: [],
