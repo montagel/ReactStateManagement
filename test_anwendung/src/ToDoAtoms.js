@@ -17,7 +17,7 @@ export const filteredAndSortedTodosAtom = atom((get) => {
 });
 
 // zum Hinzufügen eines neuen Todos
-export const addTodo = atom(
+export const addTodoAtom = atom(
     null,
     (get, set, newTodo) => {
         const currentTodos = get(todosAtom);

@@ -1,11 +1,11 @@
 import React from 'react';
 import './ToDoForm.css';import { useSetAtom, useAtomValue } from 'jotai';
-import { todosAtom, addTodo  } from './ToDoAtoms';
+import { todosAtom, addTodoAtom  } from './ToDoAtoms';
 
 function ToDoForm() {
 
   const todos = useAtomValue(todosAtom);
-  const addNewTodo = useSetAtom(addTodo);
+  const addNewTodo = useSetAtom(addTodoAtom);
 
   // Lokale Variablen, um die Eingabewerte zu speichern
   let title = '';

@@ -3,13 +3,13 @@ import React from 'react';
 import ToDoForm from './ToDoForm';
 import ToDoList from './ToDoList';
 import TodoDetails from './ToDoDetails';
-import { addTodo  } from './ToDoAtoms';
+import { addTodoAtom  } from './ToDoAtoms';
 import { useSetAtom} from 'jotai';
 
 
 function App() {
   // um ein neues Todo hinzuzufügen
-  const addNewTodo = useSetAtom(addTodo);
+  const addNewTodo = useSetAtom(addTodoAtom);
 
   // Funktion zum Verarbeiten der hochgeladenen JSON-Datei
   const handleFileUpload = (event) => {
