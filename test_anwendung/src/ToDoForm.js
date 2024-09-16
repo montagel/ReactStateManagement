@@ -81,4 +81,4 @@ function ToDoForm() {
   );
 }
 
-export default React.memo(ToDoForm);
+export default ToDoForm;

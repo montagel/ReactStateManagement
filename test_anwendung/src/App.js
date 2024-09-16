@@ -55,8 +55,6 @@ const UploadToDo = React.memo(function () {
     reader.readAsText(file);
   };
 
-
-
   return (
     <div>
       <input className="file-upload-input" type="file" accept=".json" onChange={handleFileUpload} />

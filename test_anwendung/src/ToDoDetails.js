@@ -19,4 +19,4 @@ function TodoDetails({hoveredTodo}) {
   );
 }
 
-export default React.memo(TodoDetails);
+export default TodoDetails;

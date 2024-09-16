@@ -54,4 +54,4 @@ function ToDoList({setHoveredTodo}) {
   );
 }
 
-export default React.memo(ToDoList);
+export default ToDoList;
